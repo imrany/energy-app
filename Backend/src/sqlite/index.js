@@ -33,10 +33,10 @@ const Sources = `
 
 const Location = `
     CREATE TABLE IF NOT EXISTS location (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         location_name TEXT NOT NULL,
         type varchar(10) DEFAULT 'user' not null,
         location_state TEXT NOT NULL,
-        PRIMARY KEY (location_name),
         FOREIGN KEY (location_name) REFERENCES appliances(location_name)
     )
 `;

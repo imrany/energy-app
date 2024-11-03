@@ -1,20 +1,34 @@
 import express from "express"
-import { getLeaderboard, deleteLeaderboardEntry } from '../Controllers/LeaderboardController.mjs';
-import { getNationalSources } from '../Controllers/NationalSources.mjs';
-import { createLocation, getAppliances, getLocations, loadAnalytics } from "../Controllers";
+import { 
+    createLocation, 
+    createNationalSources, 
+    deleteLeaderboardEntry,  
+    getAnalyticsData,  
+    getAppliances, 
+    getLeaderboard, 
+    getLocations, 
+    getNationalSources, 
+    loadAnalytics, 
+    updateLocation
+} from "../Controllers";
+
 const router=express.Router();
 
-router.get('/leaderboard',getLeaderboard);
 
 router.get('/analytics',loadAnalytics);
-router.get('/analytics/:locationId/:timeRange', AnalyticsController.getAnalyticsData);
+router.get('/analytics/:location_name/:timeRange', getAnalyticsData);
 
 router.get('/appliances',getAppliances);
 
 router.get('/locations',getLocations);
 router.post('/locations', createLocation);
+router.patch('/locations/:id', updateLocation);
 
 router.get('/national-sources', getNationalSources);
-router.delete('/leaderboard/:index',deleteLeaderboardEntry);
+router.post('/national-sources', createNationalSources);
+router.patch('/national-sources/:location_state', createNationalSources);
+
+router.get('/leaderboard',getLeaderboard);
+router.delete('/leaderboard/:location_name',deleteLeaderboardEntry);
 
 export default router
