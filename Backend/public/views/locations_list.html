@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Location</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Edit Location</h1>
+        <form id="locationForm">
+            <label for="locationName">Location Name:</label>
+            <input type="text" id="locationName" required>
+
+            <label for="locationState">State/Territory:</label>
+            <input type="text" id="locationState" required>
+
+            <h2>Appliances</h2>
+            <div id="appliancesList"></div>
+
+            <button type="button" id="addAppliance">Add Appliance</button>
+            <button type="submit">Save Location</button>
+        </form>
+    </div>
+    <script type="module" src="edit_location.js"></script>
+</body>
+</html>

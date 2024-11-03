@@ -1,0 +1,70 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.analytics-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    margin: 0 10px;
+}
+
+.filter-group label {
+    margin-right: 5px;
+}
+
+.chart-container, .analytics-summary, .analytics-projections {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#usageChart, #projectionChart {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.bar {
+    background-color: #3498db;
+    width: 20px;
+    margin: 0 2px;
+}
+
+#summary-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.summary-item {
+    text-align: center;
+    padding: 10px;
+}
+
+.summary-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #34495e;
+}
+
+.summary-item p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2980b9;
+    margin: 5px 0;
+}
