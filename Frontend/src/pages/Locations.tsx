@@ -54,6 +54,14 @@ export default function Locations(){
             appliances: 0, 
         }
     ])
+    const [locationsOrigin,setLocationsOrigin]=useState([
+        {
+            location_name:"",
+            location_state: "",
+            consumption: 0, //(total_watts*total_hours)/24,
+            appliances: 0, 
+        }
+    ])
 
     const handleClose = () => {
         setOpen(false); // Set open state to false to close the dialog
@@ -102,6 +110,8 @@ export default function Locations(){
             if(parseRes.error){
                 console.log(parseRes.error)
             }else{
+                console.log(parseRes.locations)
+                setLocationsOrigin(parseRes.locations)
                 setLocations(parseRes.locations)
                 let consumptions=[]
                 let appliances=[]
@@ -119,6 +129,17 @@ export default function Locations(){
         }
     }
 
+    function handleSearch(e:any) {
+        let results:any=[]
+        let search=e.target.value
+        locationsOrigin.map((location)=>{
+            if(location.location_name.toLowerCase().includes(search.toLowerCase())){
+                results.push(location)
+            }
+        })
+        setLocations(results)
+    }
+
     useEffect(()=>{
         getLocations()
     },[])
@@ -132,7 +153,7 @@ export default function Locations(){
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <Input type="search" name="search" placeholder="Type a location to search" id="" />
+                <Input type="search" name="search" placeholder="Type a location to search" onChange={handleSearch} />
             </div>
             <Card className="my-2 mx-4 max-sm:mx-3">
                 <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">

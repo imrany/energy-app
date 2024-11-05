@@ -1,22 +1,5 @@
 import { db } from "../sqlite/index.js"
 
-export const loadAnalytics = async (req, res) => {
-    try {
-        db.all('SELECT name, watts FROM  appliances;' , (error , data) => {
-            if(error){
-                console.log({error:error})
-                res.send({error:error})
-            }else{
-                console.log({analytics:data});
-                res.status(200).json({analytics:data});
-            };
-        });
-    } catch (error) {
-        console.error({error:`Error loading analytics: ${error}`});
-        res.status(500).send({error:`Error loading analytics: ${error}`});
-    }
-};
-
 export const getAnalyticsData = async (req, res) => {
     try {
         const { location_name }=req.params
@@ -32,23 +15,6 @@ export const getAnalyticsData = async (req, res) => {
     } catch (error) {
         console.error({error:`Error loading analytics: ${error}`});
         res.status(500).send({error:`Error loading analytics: ${error}`});
-    }
-};
-
-export const getAppliances = async (req, res) => {
-    try {
-        db.all('SELECT * FROM  appliances;' , (error , data) => {
-            if(error){
-                console.log({error:error})
-                res.send({error:error})
-            }else{
-                console.log({appliances:data});
-                res.status(200).json({appliances:data});
-            };
-        });
-    } catch (error) {
-        console.error({error:`Error getting appliance: ${error}`});
-        res.status(500).send({error:`Error getting appliance: ${error}`});
     }
 };
 
@@ -85,7 +51,7 @@ export const getLocations = async(req, res) => {
         console.log({error:error});
         res.status(500).send({error:`Error getting locations: ${error}`});
     }
-  };
+};
   
 export const createLocation = async(req, res) => {
     try {
@@ -150,17 +116,18 @@ export const updateLocation = async(req, res) => {
     try {
         const { previous_location_name }=req.params;
         const { location_name, location_state, appliances } = req.body;
+        const {quantity, hours, name}=appliances
         db.run(`UPDATE location SET location_name = $1, location_state = $2 WHERE location_name=$3;`,[location_name,location_state,previous_location_name] , (error , data) => {
             if(error){
                 console.log({error:error})
                 res.send({error:error})
             }else{
-                db.run(`UPDATE appliances SET location_name=$2, quantity=$3, hours=$4  WHERE name=$1;`,[appliances.name,location_name,appliances.quantity, appliances.hours] , (error , data) => {
+                db.run(`UPDATE appliances SET name=$1, quantity=$2, hours=$3, location_name=$4 WHERE location_name=$5;`,[name,quantity, hours, location_name,previous_location_name] , (error , data) => {
                     if(error){
                         console.log({error:error})
                         res.send({error:error})
                     }else{
-                        db.run(`UPDATE sources SET location_name=$1 WHERE name=$2;`,[location_name,previous_location_name] , (error , data) => {
+                        db.run(`UPDATE sources SET location_name=$1 WHERE location_name=$2;`,[location_name,previous_location_name] , (error , data) => {
                             if(error){
                                 console.log({error:error})
                                 res.send({error:error})

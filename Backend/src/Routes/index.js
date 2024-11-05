@@ -4,21 +4,15 @@ import {
     deleteLeaderboardEntry,  
     deleteLocation,  
     getAnalyticsData,  
-    getAppliances, 
     getLeaderboard, 
     getLocations, 
     getNationalSources, 
-    loadAnalytics, 
     updateLocation
 } from "../Controllers/index.js";
 
 const router=express.Router();
 
-
-router.get('/analytics',loadAnalytics);
 router.get('/analytics/:location_name', getAnalyticsData);
-
-router.get('/appliances',getAppliances);
 
 router.get('/locations',getLocations);
 router.post('/locations', createLocation);
