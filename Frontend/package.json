@@ -1,6 +1,7 @@
 {
-  "name": "insight",
+  "name": "energy-app",
   "private": true,
+  "description": "Energy usage tracking app",
   "version": "0.0.0",
   "type": "module",
   "license": "MPL-2.0",
@@ -24,8 +25,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
+    "recharts": "^2.13.3",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

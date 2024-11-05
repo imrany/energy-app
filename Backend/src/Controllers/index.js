@@ -1,4 +1,4 @@
-import { db } from "../sqlite"
+import { db } from "../sqlite/index.js"
 
 export const loadAnalytics = async (req, res) => {
     try {

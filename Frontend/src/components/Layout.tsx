@@ -1,12 +1,12 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/AppSidebar"
 
 export default function Layout(){
     return(
-        <SidebarProvider>
+        <SidebarProvider className="flex">
             <AppSidebar />
-            <main>
+            <main className="flex-grow">
                 <SidebarTrigger />
                 <Outlet/>
             </main>

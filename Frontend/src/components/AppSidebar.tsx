@@ -1,5 +1,5 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-import { Link } from "react-router-dom"
+import { BarChartBig, CircuitBoard,  LocateFixed } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
 import {
   Sidebar,
   SidebarContent,
@@ -14,43 +14,34 @@ import {
 // Menu items.
 const items = [
   {
-    title: "Home",
-    url: "#",
-    icon: Home,
+    title: "My Locations",
+    url: "/",
+    icon: LocateFixed,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Leader Board",
+    url: "/leaderboard",
+    icon: CircuitBoard,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
+    title: "Analytics",
+    url: "/analytics",
+    icon: BarChartBig,
+  }
 ]
 
 export default function AppSidebar() {
+  const { pathname } =useLocation();
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Energy App</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton className={pathname===item.url?"bg-gray-200 hover:bg-gray-200":""} asChild>
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

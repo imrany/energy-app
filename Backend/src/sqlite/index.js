@@ -2,7 +2,7 @@ import x from 'sqlite3';
 const sqlite3=x.verbose();
 
 // Connecting Database
-export const db = new sqlite3.Database("Data/database.db" , (err) => {
+export const db = new sqlite3.Database("database.db" , (err) => {
     if(err){
         console.log("Error Occurred - " + err.message);
     }else{
@@ -13,7 +13,7 @@ export const db = new sqlite3.Database("Data/database.db" , (err) => {
 // Define the SQL statement to create a table
 const Appliances = `
     CREATE TABLE IF NOT EXISTS appliances (
-        location_name PRIMARY KEY TEXT NOT NULL,
+        location_name TEXT PRIMARY KEY NOT NULL,
         name TEXT NOT NULL,
         quantity INTEGER NOT NULL,
         watts INTEGER NOT NULL,
@@ -23,11 +23,11 @@ const Appliances = `
 
 const Sources = `
     CREATE TABLE IF NOT EXISTS sources (
+        location_state TEXT PRIMARY KEY NOT NULL,
         wind INTEGER NOT NULL,
         solar INTEGER NOT NULL,
         gas INTEGER NOT NULL,
-        coal INTEGER NOT NULL,
-        location_state PRIMARY KEY TEXT NOT NULL
+        coal INTEGER NOT NULL
     )
 `;
 
@@ -42,20 +42,20 @@ const Location = `
 `;
 
 // Execute the SQL statement to create the table
-function createTable(tableSql){
+function createTable(tableSql,tableName){
     db.serialize(() => {
-        db.run(tableSql, function (err) {
-            if (err) {
-                return console.error('Error creating table:', err.message);
+        db.run(tableSql, function (error) {
+            if (error) {
+                return console.error(`Error creating ${tableName} table: ${error.message}`, error);
             }
-            console.log('Table created successfully');
+            console.log(`${tableName} table created successfully`);
         });
     })
 }
 
-createTable(Location)
-createTable(Appliances)
-createTable(Sources)
+createTable(Location,'location')
+createTable(Appliances,'appliances')
+createTable(Sources,'sources')
 
 // Close the database connection
 db.close((err) => {
