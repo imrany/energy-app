@@ -1,4 +1,4 @@
-import { BarChartBig, CircuitBoard,  LocateFixed } from "lucide-react"
+import { BarChartBig,  LocateFixed } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import {
   Sidebar,
@@ -10,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { StarIcon } from "@radix-ui/react-icons";
 
 // Menu items.
 const items = [
@@ -21,11 +22,11 @@ const items = [
   {
     title: "Leader Board",
     url: "/leaderboard",
-    icon: CircuitBoard,
+    icon: StarIcon,
   },
   {
-    title: "Analytics",
-    url: "/analytics",
+    title: "Statistics",
+    url: "/statistics",
     icon: BarChartBig,
   }
 ]

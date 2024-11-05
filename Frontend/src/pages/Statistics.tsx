@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -13,10 +13,9 @@ import { useContext, useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { GlobalContext } from "@/context"
 
-export default function LocationStats(){
-    const { id }=useParams()
+export default function Statistics(){
     const {API_URL}=useContext(GlobalContext)
-    const [locationStats,setLocationStats]=useState([{
+    const [nationalSources,setNationalSources]=useState([{
         energy: "Energy Sources", wind: 0, solar: 0, gas: 0, coal: 0
     }])
 
@@ -39,16 +38,16 @@ export default function LocationStats(){
         },
     } satisfies ChartConfig
 
-    async function getLocationStats(){
+    async function getnationalSources(){
         try {
-            let url=`${API_URL}/api/analytics/${id}`
+            let url=`${API_URL}/api/national-sources`
             const response=await fetch(url)
             const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
             }else{
-                const stats=parseRes.analytics[0]
-                setLocationStats([{
+                const stats=parseRes.sources[0]
+                setNationalSources([{
                     energy: "Energy Sources", 
                     wind: Math.round(stats.wind), 
                     solar: Math.round(stats.solar),
@@ -62,7 +61,7 @@ export default function LocationStats(){
     }
 
     useEffect(()=>{
-        getLocationStats()
+        getnationalSources()
     },[])
     return(
         <div className="h-screen flex flex-col my-2">
@@ -78,15 +77,7 @@ export default function LocationStats(){
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link to="/">
-                                Statistics
-                            </Link>
-                        </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                        <BreadcrumbPage>{id}</BreadcrumbPage>
+                        <BreadcrumbPage>Statistics</BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
@@ -95,9 +86,9 @@ export default function LocationStats(){
                 <Card>
                     <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
                         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                            <CardTitle>Location statistics</CardTitle>
+                            <CardTitle>National energy statistics</CardTitle>
                             <CardDescription>
-                                Showing total energy sources for {id}
+                                Showing total national energy sources
                             </CardDescription>
                         </div>
                         <div className="flex">
@@ -112,7 +103,7 @@ export default function LocationStats(){
                                     {chartConfig[chart].label}
                                     </span>
                                     <span className="text-lg font-bold leading-none sm:text-2xl">
-                                        {locationStats[0][chart]}
+                                        {nationalSources[0][chart]}
                                     </span>
                                 </button>
                                 )
@@ -126,7 +117,7 @@ export default function LocationStats(){
                         >
                             <BarChart
                                 accessibilityLayer
-                                data={locationStats}
+                                data={nationalSources}
                                 margin={{
                                 left: 12,
                                 right: 12,
@@ -154,9 +145,9 @@ export default function LocationStats(){
                 <Card className="my-2">
                     <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
                         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                            <CardTitle>Energy consumption</CardTitle>
+                            <CardTitle>National energy consumption</CardTitle>
                             <CardDescription>
-                                Showing energy consumed by sources
+                                Showing national energy consumed by sources
                             </CardDescription>
                         </div>
                     </CardHeader>
@@ -172,7 +163,7 @@ export default function LocationStats(){
                                         {chartConfig[chart].label}
                                     </span>
                                     <span className="text-sm leading-none">
-                                        {locationStats[0][chart]!==0?Math.round(locationStats[0][chart]-2):locationStats[0][chart]} WHs/day
+                                        {nationalSources[0][chart]!==0?Math.round(nationalSources[0][chart]-2):nationalSources[0][chart]} WHs/day
                                     </span>
                                 </div>
                             )

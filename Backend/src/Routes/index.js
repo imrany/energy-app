@@ -1,8 +1,8 @@
 import express from "express"
 import { 
     createLocation, 
-    createNationalSources, 
     deleteLeaderboardEntry,  
+    deleteLocation,  
     getAnalyticsData,  
     getAppliances, 
     getLeaderboard, 
@@ -16,19 +16,18 @@ const router=express.Router();
 
 
 router.get('/analytics',loadAnalytics);
-router.get('/analytics/:location_name/:timeRange', getAnalyticsData);
+router.get('/analytics/:location_name', getAnalyticsData);
 
 router.get('/appliances',getAppliances);
 
 router.get('/locations',getLocations);
 router.post('/locations', createLocation);
-router.patch('/locations/:id', updateLocation);
+router.patch('/locations/:previous_location_name', updateLocation);
+router.delete('/locations/:location_name', deleteLocation);
 
 router.get('/national-sources', getNationalSources);
-router.post('/national-sources', createNationalSources);
-router.patch('/national-sources/:location_state', createNationalSources);
 
 router.get('/leaderboard',getLeaderboard);
-router.delete('/leaderboard/:location_name',deleteLeaderboardEntry);
+router.delete('/leaderboard/:id',deleteLeaderboardEntry);
 
 export default router
