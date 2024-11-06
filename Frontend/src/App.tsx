@@ -10,7 +10,8 @@ import Locations from "./pages/Locations";
 import LocationStats from "./pages/LocationStats";
 
 function App() {
-    const API_URL=`http://localhost:8000`
+    const API_URL=`http://localhost:8000`;
+    // const API_URL=`https://energy-app-comf.onrender.com`
 
     useEffect(()=>{
     },[])
