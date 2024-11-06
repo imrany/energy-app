@@ -1,4 +1,4 @@
-import { db } from "../sqlite/index.js"
+import { db } from "../sqlite/index.mjs"
 
 export const getAnalyticsData = async (req, res) => {
     try {

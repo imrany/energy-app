@@ -8,7 +8,7 @@ import {
     getLocations, 
     getNationalSources, 
     updateLocation
-} from "../Controllers/index.js";
+} from "../Controllers/index.mjs";
 
 const router=express.Router();
 

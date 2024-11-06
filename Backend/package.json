@@ -5,8 +5,8 @@
     "type": "module",
     "main": "./src/index.js",
     "scripts": {
-        "dev": "nodemon ./src/index.js",
-        "start": "node --experimental-specifier-resolution=node ./src/index.js"
+        "dev": "nodemon ./src/index.mjs",
+        "start": "node ./src/index.mjs"
     },
     "dependencies": {
         "cors": "^2.8.5",
