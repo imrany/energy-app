@@ -1,3 +1,7 @@
+### Requirements
+- You need to download and install `Nodejs` (a javascript runtime), [Download here](https://nodejs.org/en/download/prebuilt-installer)
+
+
 Open both the `Frontend` and `Backend` folder on different terminal or cmd.
 ```bash
 cd Frontend
