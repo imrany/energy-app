@@ -1,3 +1,8 @@
+/*
+* Contains all views and
+* api routes 
+*/
+
 import express from "express"
 import { 
     createLocation, 
@@ -8,7 +13,7 @@ import {
     getLocations, 
     getNationalSources, 
     updateLocation
-} from "../Controllers/index.mjs";
+} from "../controller/index.mjs";
 
 const router=express.Router();
 

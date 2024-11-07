@@ -118,9 +118,9 @@ export default function Locations(){
         setLocations(getLocations)
         let consumptions=[]
         let appliances=[]
-        for (let i = 0; i < locations.length; i++) {
-            consumptions.push(Math.round(locations[i].consumption));
-            appliances.push(Math.round(locations[i].appliances));
+        for (let i = 0; i < getLocations.length; i++) {
+            consumptions.push(Math.round(getLocations[i].consumption));
+            appliances.push(Math.round(getLocations[i].appliances));
         }
         let sumConsuptions = consumptions.reduce((acc, val) => acc + val, 0)
         let sumAppliances = appliances.reduce((acc, val) => acc + val, 0)

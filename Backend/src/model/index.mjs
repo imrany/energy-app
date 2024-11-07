@@ -1,3 +1,7 @@
+/*
+* Contains all models and
+* database queries
+*/
 import x from 'sqlite3';
 const sqlite3=x.verbose();
 

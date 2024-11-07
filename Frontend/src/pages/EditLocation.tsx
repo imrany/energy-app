@@ -108,11 +108,11 @@ export default function EditLocation(){
                         <div className="flex flex-col gap-4">
                             <div className="grid w-full max-w-sm items-center gap-1.5">
                                 <Label htmlFor="location_name">Location Name</Label>
-                                <Input type="text" id="location_name" name="location_name" placeholder="Nairobi" required/>
+                                <Input type="text" id="location_name" name="location_name" placeholder={`${id}`} required/>
                             </div>
                             <div className="grid w-full max-w-sm items-center gap-1.5">
-                                <Label htmlFor="location_state">Location State</Label>
-                                <Input type="text" id="location_state" name="location_state" placeholder="Kenya" required/>
+                                <Label htmlFor="location_state">Location State / Territory</Label>
+                                <Input type="text" id="location_state" name="location_state" placeholder="Queensland" required/>
                             </div>
                         </div>
                     </CardContent>
@@ -124,16 +124,16 @@ export default function EditLocation(){
                             </div>
                             <div className="flex gap-2">
                                 <div className="grid w-full max-w-sm items-center gap-1.5">
-                                    <Label htmlFor="picture">Hours</Label>
+                                    <Label htmlFor="picture">Hours used per day</Label>
                                     <Input type="number" id="hours" required/>
                                 </div>
                                 <div className="grid w-full max-w-sm items-center gap-1.5">
-                                    <Label htmlFor="quantity">Quantity</Label>
+                                    <Label htmlFor="quantity">Quantity of the appliance</Label>
                                     <Input type="number" id="quantity" name="quantity" required/>
                                 </div>
                             </div>
                             <Button type="submit" className="w-[200px]">
-                                Add
+                                Save
                             </Button>
                         </div>
                     </CardContent>

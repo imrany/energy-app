@@ -1,4 +1,9 @@
-import { db } from "../sqlite/index.mjs"
+/*
+* Contains all controllers 
+* for the API
+*/
+
+import { db } from "../model/index.mjs"
 
 export const getAnalyticsData = async (req, res) => {
     try {
