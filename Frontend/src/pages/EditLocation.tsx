@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { GlobalContext } from "@/context"
 
 export default function EditLocation(){
-    const {API_URL}=useContext(GlobalContext)
+    const {API_URL, handleGetLocations}=useContext(GlobalContext)
     const { id }=useParams()
     const navigate=useNavigate()
 
@@ -57,6 +57,7 @@ export default function EditLocation(){
             if(parseRes.error){
                 alert(parseRes.error)
             }else{
+                handleGetLocations()
                 navigate("/")
             }
         } catch (error:any) {

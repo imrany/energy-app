@@ -40,7 +40,7 @@ import { GlobalContext } from "@/context";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 export default function Locations(){
-    const {API_URL}=useContext(GlobalContext)
+    const {API_URL, getLocations,  handleGetLocations }=useContext(GlobalContext)
     const [error,setError]=useState("")
     const [open, setOpen] = useState(false); // Manage dialog visibility
     const navigate=useNavigate()
@@ -95,36 +95,9 @@ export default function Locations(){
             }else{
                 handleClose()
                 e.target.reset()
-                getLocations()
+                handleGetLocations()
             }
         }catch(error:any){
-            console.log(error.message)
-        }
-    }
-
-    async function getLocations(){
-        try {
-            let url=`${API_URL}/api/locations`
-            const response=await fetch(url)
-            const parseRes=await response.json()
-            if(parseRes.error){
-                console.log(parseRes.error)
-            }else{
-                console.log(parseRes.locations)
-                setLocationsOrigin(parseRes.locations)
-                setLocations(parseRes.locations)
-                let consumptions=[]
-                let appliances=[]
-                for (let i = 0; i < parseRes.locations.length; i++) {
-                    consumptions.push(Math.round(parseRes.locations[i].consumption));
-                    appliances.push(Math.round(parseRes.locations[i].appliances));
-                }
-                let sumConsuptions = consumptions.reduce((acc, val) => acc + val, 0)
-                let sumAppliances = appliances.reduce((acc, val) => acc + val, 0)
-                setTotalConsumption(sumConsuptions)
-                setTotalAppliances(sumAppliances)
-            }
-        } catch (error:any) {
             console.log(error.message)
         }
     }
@@ -140,9 +113,24 @@ export default function Locations(){
         setLocations(results)
     }
 
+    function setLocation(){
+        setLocationsOrigin(getLocations)
+        setLocations(getLocations)
+        let consumptions=[]
+        let appliances=[]
+        for (let i = 0; i < locations.length; i++) {
+            consumptions.push(Math.round(locations[i].consumption));
+            appliances.push(Math.round(locations[i].appliances));
+        }
+        let sumConsuptions = consumptions.reduce((acc, val) => acc + val, 0)
+        let sumAppliances = appliances.reduce((acc, val) => acc + val, 0)
+        setTotalConsumption(sumConsuptions)
+        setTotalAppliances(sumAppliances)
+    }
+
     useEffect(()=>{
-        getLocations()
-    },[])
+        setLocation()
+    },[getLocations])
     return(
         <div className="h-screen flex flex-col my-2">
             <div className="flex flex-col gap-2 w-full px-4 max-sm:px-3">
@@ -167,7 +155,7 @@ export default function Locations(){
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Button variant="outline" onClick={() => getLocations()}>
+                                    <Button variant="outline" onClick={() => handleGetLocations()}>
                                         <ReloadIcon/>
                                     </Button>
                                 </TooltipTrigger>
