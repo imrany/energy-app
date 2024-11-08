@@ -5,7 +5,8 @@ import router from './view/index.mjs';
 config()
 
 const cors_option = {
-    origin:["http://localhost:3000","https://tracking-energy-usage.web.app"],
+    // origin:["http://localhost:3000","https://tracking-energy-usage.web.app"],
+    origin:"*",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PATCH", "PUT"]
 }
 
