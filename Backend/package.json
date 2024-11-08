@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "Energy usage tracking app",
     "type": "module",
-    "main": "./src/index.mjs",
+    "main": "./src/server.mjs",
     "scripts": {
-        "dev": "nodemon ./src/index.mjs",
-        "start": "node ./src/index.mjs"
+        "dev": "nodemon ./src/server.mjs",
+        "start": "node ./src/server.mjs"
     },
     "dependencies": {
         "cors": "^2.8.5",

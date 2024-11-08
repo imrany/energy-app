@@ -1,19 +1,11 @@
 /*
-* Contains all views and
-* api routes 
+* defined all api routes here 
 */
-
 import express from "express"
-import { 
-    createLocation, 
-    deleteLeaderboardEntry,  
-    deleteLocation,  
-    getAnalyticsData,  
-    getLeaderboard, 
-    getLocations, 
-    getNationalSources, 
-    updateLocation
-} from "../controller/index.mjs";
+import { getAnalyticsData } from "../Controllers/AnalyticsController.mjs";
+import { createLocation, deleteLocation, getLocations, updateLocation } from "../Controllers/LocationController.mjs";
+import { getNationalSources } from "../Controllers/NationalStatsController.mjs";
+import { deleteLeaderboardEntry, getLeaderboard } from "../Controllers/LeaderBoardController.mjs";
 
 const router=express.Router();
 
